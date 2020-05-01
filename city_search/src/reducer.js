@@ -1,22 +1,22 @@
 // reducer.js
 
 import {
-  FETCH_PRODUCTS_PENDING,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_ERROR,
+  FETCH_CITIES_PENDING,
+  FETCH_CITIES_SUCCESS,
+  FETCH_CITIES_ERROR,
 } from "./actions";
 
 import initialState from "./initialState";
 
-const productsReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_PRODUCTS_PENDING:
+    case FETCH_CITIES_PENDING:
       return {
         ...state,
         pending: true,
         searched: true,
       };
-    case FETCH_PRODUCTS_SUCCESS:
+    case FETCH_CITIES_SUCCESS:
       console.log(action);
       const { total, data } = action.cities;
       const cities = data.reduce((acc, value) => {
@@ -33,7 +33,7 @@ const productsReducer = (state = initialState, action) => {
         pending: false,
         total,
       };
-    case FETCH_PRODUCTS_ERROR:
+    case FETCH_CITIES_ERROR:
       return {
         ...state,
         pending: false,
@@ -44,10 +44,10 @@ const productsReducer = (state = initialState, action) => {
   }
 };
 
-export const getProducts = (state) => state.cities;
-export const getProductsError = (state) => state.error;
-export const getProductsPending = (state) => state.pending;
-export const getProductsSearched = (state) => state.searched;
+export const getCities = (state) => state.cities;
+export const getCitiesError = (state) => state.error;
+export const getCitiesPending = (state) => state.pending;
+export const getCitiesSearched = (state) => state.searched;
 export const getTotal = (state) => state.total;
 
-export default productsReducer;
+export default reducer;

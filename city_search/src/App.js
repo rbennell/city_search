@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import "./custom.scss";
 
 import { createStore } from "redux";
 // import cities from "./reducers";
@@ -10,13 +11,13 @@ import CitiesTable from "./components/citiesTable";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import fetchProducts from "./fetchProducts";
+import fetchCities from "./fetchCities";
 
 import {
-  getProductsError,
-  getProducts,
-  getProductsPending,
-  getProductsSearched,
+  getCitiesError,
+  getCities,
+  getCitiesPending,
+  getCitiesSearched,
   getTotal,
 } from "./reducer";
 
@@ -25,7 +26,7 @@ const validateSearchValue = (searchValue) =>
 
 const submitSearch = (
   e,
-  fetchProductsAction,
+  fetchCitiesAction,
   searchValue,
   setValidationError
 ) => {
@@ -35,7 +36,7 @@ const submitSearch = (
   if (!isValid) {
     return;
   }
-  fetchProductsAction(searchValue);
+  fetchCitiesAction(searchValue);
 };
 
 const updateSearchValue = (e, setSearchValue, setValidationError) => {
@@ -43,14 +44,14 @@ const updateSearchValue = (e, setSearchValue, setValidationError) => {
   setSearchValue(e.target.value);
 };
 
-function App({ error, cities, fetchProductsAction, pending, searched, total }) {
+function App({ error, cities, fetchCitiesAction, pending, searched, total }) {
   const [searchValue, setSearchValue] = useState("");
   const [validationError, setValidationError] = useState(false);
   return (
     <div className="App">
       <form
         onSubmit={(e) =>
-          submitSearch(e, fetchProductsAction, searchValue, setValidationError)
+          submitSearch(e, fetchCitiesAction, searchValue, setValidationError)
         }
       >
         <input
@@ -73,17 +74,17 @@ function App({ error, cities, fetchProductsAction, pending, searched, total }) {
   );
 }
 const mapStateToProps = (state) => ({
-  cities: getProducts(state),
-  error: getProductsError(state),
-  pending: getProductsPending(state),
-  searched: getProductsSearched(state),
+  cities: getCities(state),
+  error: getCitiesError(state),
+  pending: getCitiesPending(state),
+  searched: getCitiesSearched(state),
   total: getTotal(state),
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      fetchProductsAction: fetchProducts,
+      fetchCitiesAction: fetchCities,
     },
     dispatch
   );

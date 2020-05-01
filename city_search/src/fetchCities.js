@@ -1,25 +1,25 @@
-// fetchProducts.js
+// fetchCities.js
 import fetch from "isomorphic-unfetch";
 
 import {
-  fetchProductsPending,
-  fetchProductsSuccess,
-  fetchProductsError,
+  fetchCitiesPending,
+  fetchCitiesSuccess,
+  fetchCitiesError,
 } from "./actions";
 
-const fetchProducts = (searchValue) => {
+const fetchCities = (searchValue) => {
   return async (dispatch) => {
-    dispatch(fetchProductsPending());
+    dispatch(fetchCitiesPending());
     const url = `https://jsonmock.hackerrank.com/api/cities/?city=${searchValue}`;
     const res = await fetch(url);
     const json = await res.json();
     if (res.error) {
-      dispatch(fetchProductsError(res.error));
+      dispatch(fetchCitiesError(res.error));
       return;
     }
-    dispatch(fetchProductsSuccess(json));
+    dispatch(fetchCitiesSuccess(json));
     return json;
   };
 };
 
-export default fetchProducts;
+export default fetchCities;
