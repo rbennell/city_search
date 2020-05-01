@@ -1,5 +1,3 @@
-// reducer.js
-
 import {
   FETCH_CITIES_PENDING,
   FETCH_CITIES_SUCCESS,
@@ -17,7 +15,6 @@ const reducer = (state = initialState, action) => {
         searched: true,
       };
     case FETCH_CITIES_SUCCESS:
-      console.log(action);
       const { total, data } = action.cities;
       const cities = data.reduce((acc, value) => {
         const { city, state } = value;

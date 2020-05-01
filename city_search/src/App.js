@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "./custom.scss";
 
-import { createStore } from "redux";
-// import cities from "./reducers";
-import { setCities } from "./actions";
-
 import Spinner from "./components/spinner";
 import CitiesTable from "./components/citiesTable";
 
@@ -56,9 +52,8 @@ function App({ error, cities, fetchCitiesAction, pending, searched, total }) {
       >
         <input
           name="search"
-          onChange={
-            (e) => updateSearchValue(e, setSearchValue, setValidationError)
-            // setValidationError(false) && setSearchValue(e.target.value)
+          onChange={(e) =>
+            updateSearchValue(e, setSearchValue, setValidationError)
           }
         />
         <input type="submit" />
